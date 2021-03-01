@@ -76,6 +76,31 @@ class Game(private var context: Context,view: TextView) {
         }
     }
 
+    fun movePacmanLeft(pixels: Int) {
+        //still within our boundaries?
+        if (pacx + pixels + pacBitmap.width < w) {
+            pacx = pacx + pixels
+            doCollisionCheck()
+            gameView!!.invalidate()
+        }
+    }
+    fun movePacmanUp(pixels: Int) {
+        //still within our boundaries?
+        if (pacx + pixels + pacBitmap.width < w) {
+            pacx = pacx + pixels
+            doCollisionCheck()
+            gameView!!.invalidate()
+        }
+    }
+    fun movePacmanDown(pixels: Int) {
+        //still within our boundaries?
+        if (pacx + pixels + pacBitmap.width < w) {
+            pacx = pacx + pixels
+            doCollisionCheck()
+            gameView!!.invalidate()
+        }
+    }
+
     //TODO check if the pacman touches a gold coin
     //and if yes, then update the neccesseary data
     //for the gold coins and the points

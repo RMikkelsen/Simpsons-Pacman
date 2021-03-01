@@ -31,9 +31,16 @@ class MainActivity : AppCompatActivity() {
             game?.movePacmanRight(10)
         }
 
-
+        moveLeft.setOnClickListener {
+            game?.movePacmanLeft(10)
+        }
+        moveUp.setOnClickListener {
+            game?.movePacmanUp(10)
+        }
+        moveDown.setOnClickListener {
+            game?.movePacmanDown(10)
+        }
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
