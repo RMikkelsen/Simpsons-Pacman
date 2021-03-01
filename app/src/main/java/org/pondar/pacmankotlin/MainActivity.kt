@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         moveRight.setOnClickListener {
             game?.movePacmanRight(10)
         }
-
         moveLeft.setOnClickListener {
             game?.movePacmanLeft(10)
         }
