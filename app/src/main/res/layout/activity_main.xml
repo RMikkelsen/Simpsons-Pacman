@@ -35,13 +35,15 @@
         android:layout_height="wrap_content"
         android:text="@string/move_down"/>
 </LinearLayout>
-        <org.pondar.pacmankotlin.GameView
-            android:id="@+id/gameView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/buttons">
 
-        </org.pondar.pacmankotlin.GameView>
+
+    <org.pondar.pacmankotlin.GameView
+        android:id="@+id/gameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttons">
+
+    </org.pondar.pacmankotlin.GameView>
 
         <TextView
             android:id="@+id/pointsView"

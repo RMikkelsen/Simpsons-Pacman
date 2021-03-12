@@ -1,12 +1,14 @@
 package org.pondar.pacmankotlin
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+
 
 
 //note we now create our own view class that extends the built-in View class
@@ -41,24 +43,27 @@ class GameView : View {
         game?.setSize(h, w)
         Log.d("GAMEVIEW", "h = $h, w = $w")
 
-        //are the coins initiazlied?
-        //if not initizlise them
+        //are the coins initialized?
+
+        //if not initialize them
         if (!(game!!.coinsInitialized))
             game?.initializeGoldcoins()
-
 
         //Making a new paint object
         val paint = Paint()
         canvas.drawColor(Color.WHITE) //clear entire canvas to white color
-
         //draw the pacman
         canvas.drawBitmap(game!!.pacBitmap, game?.pacx!!.toFloat(),
                 game?.pacy!!.toFloat(), paint)
 
         //TODO loop through the list of goldcoins and draw them here
+for (coin in game!!.coins)
 
+if (!coin.taken){
+    canvas.drawBitmap(game!!.coinBitmap, coin.coinX!!.toFloat(),
+            coin.coinY!!.toFloat(), paint)
+}
         game?.doCollisionCheck()
         super.onDraw(canvas)
     }
-
 }

@@ -28,16 +28,16 @@ class MainActivity : AppCompatActivity() {
         game?.newGame()
 
         moveRight.setOnClickListener {
-            game?.movePacmanRight(10)
+            game?.movePacmanRight(30)
         }
         moveLeft.setOnClickListener {
-            game?.movePacmanLeft(10)
+            game?.movePacmanLeft(30)
         }
         moveUp.setOnClickListener {
-            game?.movePacmanUp(10)
+            game?.movePacmanUp(30)
         }
         moveDown.setOnClickListener {
-            game?.movePacmanDown(10)
+            game?.movePacmanDown(30)
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
