@@ -25,6 +25,9 @@ class Game(private var context: Context,view: TextView) {
     var pacy: Int = 0
     var coinBitmap: Bitmap
 
+    var running = false
+    var direction = 0
+
 
     //did we initialize the coins?
     var coinsInitialized = false
@@ -36,12 +39,13 @@ class Game(private var context: Context,view: TextView) {
     private var gameView: GameView? = null
     private var h: Int = 0
     private var w: Int = 0 //height and width of screen
-
     //The init code is called when we create a new Game class.
     //it's a good place to initialize our images.
     init {
         pacBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pacman)
         coinBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.goldcoin)
+
+
     }
 
     fun setGameView(view: GameView) {
@@ -80,6 +84,7 @@ class Game(private var context: Context,view: TextView) {
         this.h = h
         this.w = w
     }
+
 
     //works check sides/boundaries
     fun movePacmanRight(pixels: Int) {
@@ -134,11 +139,13 @@ class Game(private var context: Context,view: TextView) {
                 points += 1
                 pointsView.text = "${context.resources.getString(R.string.points)}$points"
             }
-            if (points == coins.size || coin.taken == null) {newGame() }
+            if (points == coins.size && coin.taken == true) {
+                return newGame() }
+            }
 
         }
     }
-}
+
 
 
 

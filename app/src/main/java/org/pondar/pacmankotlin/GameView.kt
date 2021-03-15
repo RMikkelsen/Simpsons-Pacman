@@ -1,14 +1,10 @@
 package org.pondar.pacmankotlin
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-
 
 
 //note we now create our own view class that extends the built-in View class
@@ -17,12 +13,30 @@ class GameView : View {
     private var game: Game? = null
     private var h: Int = 0
     private var w: Int = 0 //used for storing our height and width of the view
+    var pacBitmap: Bitmap
+    var pacx: Int = 0
+    var pacy: Int = 0
 
     fun setGame(game: Game?) {
         this.game = game
     }
+    init {
+        pacBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pacman)
+    }
 
+    //timer
+    fun reset() {
+        pacx = 50
+        invalidate()
+    }
 
+//this is in the game class for each direction
+    //fun move(x: Int) {
+        //still within our boundaries?
+      //  if (pacx + x + pacBitmap.width < w)
+       //     pacx = pacx + x
+      //  invalidate() //redraw everything
+  //  }
     /* The next 3 constructors are needed for the Android view system,
 	when we have a custom view.
 	 */
@@ -55,6 +69,8 @@ class GameView : View {
         //draw the pacman
         canvas.drawBitmap(game!!.pacBitmap, game?.pacx!!.toFloat(),
                 game?.pacy!!.toFloat(), paint)
+
+
 
         //TODO loop through the list of goldcoins and draw them here
 for (coin in game!!.coins)

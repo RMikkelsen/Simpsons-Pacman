@@ -7,5 +7,11 @@
     <string name="move_left">Move Left</string>
     <string name="move_up">Move Up</string>
     <string name="move_down">Move Down</string>
+    <string name="timerValue">Play Time: %1$d</string>
+    <string name="timerValue2">Time Left: %1$d</string>
+    <string name="textview">Press Play to Start</string>
+    <string name="reset">Reset</string>
+    <string name="pause">Pause</string>
+    <string name="play">play</string>
 
 </resources>
