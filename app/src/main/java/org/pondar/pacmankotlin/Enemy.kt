@@ -1,4 +1,4 @@
 package org.pondar.pacmankotlin
 
-class Enemy (var enemyxx: Int, var enemyy : Int, var alive: Boolean = true ){
+class Enemy (var enemyx: Int, var enemyy : Int, var alive: Boolean = true ){
 }

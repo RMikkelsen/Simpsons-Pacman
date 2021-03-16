@@ -63,6 +63,9 @@ class GameView : View {
         if (!(game!!.coinsInitialized))
             game?.initializeGoldcoins()
 
+        if (!(game!!.enemyInitialized))
+            game?.initializeenemy()
+
         //Making a new paint object
         val paint = Paint()
         canvas.drawColor(Color.WHITE) //clear entire canvas to white color
@@ -79,6 +82,16 @@ if (!coin.taken){
     canvas.drawBitmap(game!!.coinBitmap, coin.coinX!!.toFloat(),
             coin.coinY!!.toFloat(), paint)
 }
+        game?.doCollisionCheck()
+        super.onDraw(canvas)
+
+        //TODO loop through the list of enemy and draw them here
+        for (enemy in game!!.enemy)
+
+            if (!enemy.alive){
+                canvas.drawBitmap(game!!.enemyBitmap, enemy.enemyx!!.toFloat(),
+                        enemy.enemyy!!.toFloat(), paint)
+            }
         game?.doCollisionCheck()
         super.onDraw(canvas)
     }

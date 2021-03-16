@@ -144,6 +144,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             game?.running = false
         } else if (v.id == R.id.reset) {
             counter = 0
+            counter2 = 26
             game?.newGame() //you should call the newGame method instead of this
             game?.running = false
          textView.text = getString(R.string.timerValue,counter)
@@ -169,6 +170,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             Toast.makeText(this, "New Game clicked", Toast.LENGTH_LONG).show()
             game?.running = false
             counter = 0
+            counter2 = 26
             game?.newGame()
             textView.text = getString(R.string.timerValue,counter)
             return true
@@ -189,7 +191,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             if (counter2 <= 0) {
                 Toast.makeText(this, "GAME OVER!!", Toast.LENGTH_SHORT).show()
                 game?.running = false
+                game?.newGame()
                 counter2 = 26
+
 
             }
 

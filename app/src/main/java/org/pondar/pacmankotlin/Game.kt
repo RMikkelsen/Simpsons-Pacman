@@ -24,6 +24,7 @@ class Game(private var context: Context,view: TextView) {
     var pacx: Int = 0
     var pacy: Int = 0
     var coinBitmap: Bitmap
+    var enemyBitmap: Bitmap
 
     var running = false
     var direction = 0
@@ -31,9 +32,11 @@ class Game(private var context: Context,view: TextView) {
 
     //did we initialize the coins?
     var coinsInitialized = false
+    var enemyInitialized = false
 
     //the list of goldcoins - initially empty
     var coins = ArrayList<GoldCoin>()
+    var enemy = ArrayList<Enemy>()
 
     //a reference to the gameview
     private var gameView: GameView? = null
@@ -44,6 +47,7 @@ class Game(private var context: Context,view: TextView) {
     init {
         pacBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pacman)
         coinBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.goldcoin)
+        enemyBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.burns)
     }
 
     fun setGameView(view: GameView) {
@@ -67,12 +71,33 @@ class Game(private var context: Context,view: TextView) {
         coinsInitialized = true
     }
 
+    //TODO initialize goldcoins also here
+    fun initializeenemy() {
+        //DO Stuff to initialize with some coins.
+        //DO Stuff to initialize the array list with some coins.
+        var minX: Int = 0
+        var maxX: Int = w - enemyBitmap.width
+        var minY: Int = 0
+        var maxY: Int = h - enemyBitmap.width
+        val random = Random()
+        for (i in 0..5) {
+            var randomX: Int = random.nextInt(maxX - minX + 1) + minX
+            var randomY: Int = random.nextInt(maxY - minY + 1) + minY
+            enemy.add(Enemy(randomX, randomY, false))
+        }
+        enemyInitialized = true
+    }
+
+
+
     fun newGame() {
         pacx = 100
         pacy = 400 //just some starting coordinates - you can change this.
         //reset the points
         coins.clear()
         coinsInitialized = false
+        enemy.clear()
+        enemyInitialized = false
         points = 0
         pointsView.text = "${context.resources.getString(R.string.points)} $points"
         gameView?.invalidate() //redraw screen
