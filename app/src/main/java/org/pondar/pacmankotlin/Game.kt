@@ -44,8 +44,6 @@ class Game(private var context: Context,view: TextView) {
     init {
         pacBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pacman)
         coinBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.goldcoin)
-
-
     }
 
     fun setGameView(view: GameView) {
@@ -70,7 +68,7 @@ class Game(private var context: Context,view: TextView) {
     }
 
     fun newGame() {
-        pacx = 50
+        pacx = 100
         pacy = 400 //just some starting coordinates - you can change this.
         //reset the points
         coins.clear()
@@ -78,6 +76,7 @@ class Game(private var context: Context,view: TextView) {
         points = 0
         pointsView.text = "${context.resources.getString(R.string.points)} $points"
         gameView?.invalidate() //redraw screen
+
     }
 
     fun setSize(h: Int, w: Int) {
@@ -139,7 +138,7 @@ class Game(private var context: Context,view: TextView) {
                 points += 1
                 pointsView.text = "${context.resources.getString(R.string.points)}$points"
             }
-            if (points == coins.size && coin.taken == true) {
+            if (points == coins.size && coin.taken) {
                 return newGame() }
             }
 

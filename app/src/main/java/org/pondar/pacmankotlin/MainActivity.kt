@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     //constants for directions - define the rest yourself
     //for game timer (60 sec)
     private var Timer2: Timer = Timer()
-    var counter2 : Int = 0
+    var counter2 : Int = 26
     //reference to the game class.
     private var game: Game? = null
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 timerMethod()
             }
 
-        }, 0, 150) //0 indicates we start now, 200
+        }, 0, 200) //0 indicates we start now, 200
         //is the number of miliseconds between each call
 
         //this timer for countdown
@@ -50,8 +50,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 timerMethod2()
             }
 
-        }, 0, 1000) //0 indicates we start now, 200
-        //is the number of miliseconds between each call
+        }, 0, 1000) //0 indicates we start now, 1000 is for each second
 
 
         game = Game(this,pointsView)
@@ -145,7 +144,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             game?.running = false
         } else if (v.id == R.id.reset) {
             counter = 0
-            gameView.reset() //you should call the newGame method instead of this
+            game?.newGame() //you should call the newGame method instead of this
             game?.running = false
          textView.text = getString(R.string.timerValue,counter)
 
@@ -168,7 +167,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             return true
         } else if (id == R.id.action_newGame) {
             Toast.makeText(this, "New Game clicked", Toast.LENGTH_LONG).show()
+            game?.running = false
+            counter = 0
             game?.newGame()
+            textView.text = getString(R.string.timerValue,counter)
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -178,12 +180,21 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         //This method runs in the same thread as the UI.
         // so we can draw
         if (game?.running == true) {
-            counter2++
+            counter2--
             //update the counter - notice this is NOT seconds in this example
             //you need TWO counters - one for the timer count down that will
             // run every second and one for the pacman which need to run
             //faster than every second
             textView3.text = getString(R.string.timerValue2, counter2)
+            if (counter2 <= 0) {
+                Toast.makeText(this, "GAME OVER!!", Toast.LENGTH_SHORT).show()
+                game?.running = false
+                counter2 = 26
+
+            }
+
         }
+
+
         }
 }
