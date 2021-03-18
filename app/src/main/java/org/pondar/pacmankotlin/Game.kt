@@ -100,7 +100,6 @@ class Game(private var context: Context, view: TextView) {
         coinsInitialized = false
         enemy.clear()
         enemyInitialized = false
-
         points = 0
         pointsView.text = "${context.resources.getString(R.string.points)} $points"
         gameView?.invalidate() //redraw screen
@@ -153,12 +152,9 @@ class Game(private var context: Context, view: TextView) {
 
     //works check sides/boundaries
     fun moveEnemyRight(pixels: Int) {
-
-
         for (enemy in enemy) {
-
             if (enemy.enemyx + pixels + enemyBitmap.width < w) {
-                enemy.enemyx = enemyx + pixels
+                enemy.enemyx = enemy.enemyx + pixels
                 doCollisionCheck2()
                 gameView!!.invalidate()
             }
@@ -169,7 +165,7 @@ class Game(private var context: Context, view: TextView) {
     fun moveEnemyLeft(pixels: Int) {
         for (enemy in enemy) {
             if (enemy.enemyx > 0) {
-                enemy.enemyx = enemyx - pixels
+                enemy.enemyx = enemy.enemyx - pixels
                 doCollisionCheck2()
                 gameView!!.invalidate()
             }
@@ -180,7 +176,7 @@ class Game(private var context: Context, view: TextView) {
     fun moveEnemyUp(pixels: Int) {
         for (enemy in enemy) {
             if (enemy.enemyy > 0) {
-                enemy.enemyy = enemyy - pixels
+                enemy.enemyy = enemy.enemyy - pixels
                 doCollisionCheck2()
                 gameView!!.invalidate()
             }
@@ -191,7 +187,7 @@ class Game(private var context: Context, view: TextView) {
     fun moveEnemyDown(pixels: Int) {
         for (enemy in enemy) {
             if (enemy.enemyx + pixels + enemyBitmap.height < h) {
-                enemy.enemyy = enemyy + pixels
+                enemy.enemyy = enemy.enemyy + pixels
                 doCollisionCheck2()
                 gameView!!.invalidate()
             }

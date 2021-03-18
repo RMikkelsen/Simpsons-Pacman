@@ -107,19 +107,20 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
             if (game?.direction == 0) { // move right
                 game?.movePacmanRight(20)
-                game?.moveEnemyRight(10)
+                game?.moveEnemyLeft(20)
+
                 //move the pacman - you
                 //should call a method on your game class to move
                 //the pacman instead of this - you have already made that
             } else if (game?.direction == 1) {
                 game?.movePacmanLeft(20)
-                game?.moveEnemyLeft(10)
+                game?.moveEnemyRight(20)
             } else if (game?.direction == 2) {
                 game?.movePacmanUp(20)
-                game?.moveEnemyUp(10)
+                game?.moveEnemyDown(20)
             } else if (game?.direction == 3) {
                 game?.movePacmanDown(20)
-                game?.moveEnemyDown(10)
+                game?.moveEnemyUp(20)
             }
         }
     }
