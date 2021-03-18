@@ -14,18 +14,19 @@ import java.util.*
  * This class should contain all your game logic
  */
 
-class Game(private var context: Context,view: TextView) {
+class Game(private var context: Context, view: TextView) {
 
     private var pointsView: TextView = view
     private var points: Int = 0
 
     //bitmap of the pacman
     var pacBitmap: Bitmap
-    var pacx: Int = 0
-    var pacy: Int = 0
+    var pacx = 0
+    var pacy = 0
     var coinBitmap: Bitmap
     var enemyBitmap: Bitmap
-
+    var enemyx = 0
+    var enemyy = 0
     var running = false
     var direction = 0
 
@@ -34,14 +35,15 @@ class Game(private var context: Context,view: TextView) {
     var coinsInitialized = false
     var enemyInitialized = false
 
-    //the list of goldcoins - initially empty
+    //the list
     var coins = ArrayList<GoldCoin>()
     var enemy = ArrayList<Enemy>()
 
     //a reference to the gameview
     private var gameView: GameView? = null
-    private var h: Int = 0
-    private var w: Int = 0 //height and width of screen
+    private var h = 0
+    private var w = 0 //height and width of screen
+
     //The init code is called when we create a new Game class.
     //it's a good place to initialize our images.
     init {
@@ -63,7 +65,7 @@ class Game(private var context: Context,view: TextView) {
         var minY: Int = 0
         var maxY: Int = h - coinBitmap.width
         val random = Random()
-        for (i in 0..10) {
+        for (i in 0..8) {
             var randomX: Int = random.nextInt(maxX - minX + 1) + minX
             var randomY: Int = random.nextInt(maxY - minY + 1) + minY
             coins.add(GoldCoin(randomX, randomY, false))
@@ -71,23 +73,23 @@ class Game(private var context: Context,view: TextView) {
         coinsInitialized = true
     }
 
-    //TODO initialize goldcoins also here
+    //TODO initialize enemy also here
     fun initializeenemy() {
-        //DO Stuff to initialize with some coins.
-        //DO Stuff to initialize the array list with some coins.
+        //DO Stuff to initialize with some enemy
+        //DO Stuff to initialize the array list with enemy
         var minX: Int = 0
         var maxX: Int = w - enemyBitmap.width
         var minY: Int = 0
         var maxY: Int = h - enemyBitmap.width
         val random = Random()
-        for (i in 0..5) {
+        for (i in 0..3) {
             var randomX: Int = random.nextInt(maxX - minX + 1) + minX
             var randomY: Int = random.nextInt(maxY - minY + 1) + minY
             enemy.add(Enemy(randomX, randomY, false))
         }
         enemyInitialized = true
-    }
 
+    }
 
 
     fun newGame() {
@@ -98,6 +100,7 @@ class Game(private var context: Context,view: TextView) {
         coinsInitialized = false
         enemy.clear()
         enemyInitialized = false
+
         points = 0
         pointsView.text = "${context.resources.getString(R.string.points)} $points"
         gameView?.invalidate() //redraw screen
@@ -120,7 +123,6 @@ class Game(private var context: Context,view: TextView) {
         }
     }
 
-    //works
     fun movePacmanLeft(pixels: Int) {
         //still within our boundaries?
         if (pacx > 0) {
@@ -130,7 +132,6 @@ class Game(private var context: Context,view: TextView) {
         }
     }
 
-    //works
     fun movePacmanUp(pixels: Int) {
         //still within our boundaries?
         if (pacy > 0) {
@@ -140,13 +141,71 @@ class Game(private var context: Context,view: TextView) {
         }
     }
 
-    //works
     fun movePacmanDown(pixels: Int) {
         //still within our boundaries?
         if (pacy + pixels + pacBitmap.height < h) {
             pacy = pacy + pixels
             doCollisionCheck()
             gameView!!.invalidate()
+        }
+    }
+
+
+    //works check sides/boundaries
+    fun moveEnemyRight(pixels: Int) {
+
+
+        for (enemy in enemy) {
+
+            if (enemy.enemyx + pixels + enemyBitmap.width < w) {
+                enemy.enemyx = enemyx + pixels
+                doCollisionCheck2()
+                gameView!!.invalidate()
+            }
+        }
+    }
+
+    //works
+    fun moveEnemyLeft(pixels: Int) {
+        for (enemy in enemy) {
+            if (enemy.enemyx > 0) {
+                enemy.enemyx = enemyx - pixels
+                doCollisionCheck2()
+                gameView!!.invalidate()
+            }
+        }
+    }
+
+    //works
+    fun moveEnemyUp(pixels: Int) {
+        for (enemy in enemy) {
+            if (enemy.enemyy > 0) {
+                enemy.enemyy = enemyy - pixels
+                doCollisionCheck2()
+                gameView!!.invalidate()
+            }
+        }
+    }
+
+    //works
+    fun moveEnemyDown(pixels: Int) {
+        for (enemy in enemy) {
+            if (enemy.enemyx + pixels + enemyBitmap.height < h) {
+                enemy.enemyy = enemyy + pixels
+                doCollisionCheck2()
+                gameView!!.invalidate()
+            }
+        }
+    }
+
+    //TODO check if the pacman touches an enemy
+    fun doCollisionCheck2() {
+        for (enemy in enemy) {
+            if (pacx + pacBitmap.width >= enemy.enemyx && pacx <= enemy.enemyx + enemyBitmap.width && pacy + pacBitmap.height >= enemy.enemyy && pacy <= enemy.enemyy + enemyBitmap.height && !enemy.alive) {
+                Toast.makeText(this.context, "DOH!!", Toast.LENGTH_SHORT).show()
+                enemy.alive = false
+                //return newGame()
+            }
         }
     }
 
@@ -164,11 +223,12 @@ class Game(private var context: Context,view: TextView) {
                 pointsView.text = "${context.resources.getString(R.string.points)}$points"
             }
             if (points == coins.size && coin.taken) {
-                return newGame() }
+                return newGame()
             }
-
         }
+
     }
+}
 
 
 

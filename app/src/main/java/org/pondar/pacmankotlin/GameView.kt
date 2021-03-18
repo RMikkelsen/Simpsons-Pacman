@@ -13,15 +13,11 @@ class GameView : View {
     private var game: Game? = null
     private var h: Int = 0
     private var w: Int = 0 //used for storing our height and width of the view
-    var pacBitmap: Bitmap
     var pacx: Int = 0
     var pacy: Int = 0
 
     fun setGame(game: Game?) {
         this.game = game
-    }
-    init {
-        pacBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pacman)
     }
 
     //timer
@@ -30,13 +26,6 @@ class GameView : View {
         invalidate()
     }
 
-//this is in the game class for each direction
-    //fun move(x: Int) {
-        //still within our boundaries?
-      //  if (pacx + x + pacBitmap.width < w)
-       //     pacx = pacx + x
-      //  invalidate() //redraw everything
-  //  }
     /* The next 3 constructors are needed for the Android view system,
 	when we have a custom view.
 	 */
@@ -74,25 +63,25 @@ class GameView : View {
                 game?.pacy!!.toFloat(), paint)
 
 
-
         //TODO loop through the list of goldcoins and draw them here
-for (coin in game!!.coins)
+        for (coin in game!!.coins)
 
-if (!coin.taken){
-    canvas.drawBitmap(game!!.coinBitmap, coin.coinX!!.toFloat(),
-            coin.coinY!!.toFloat(), paint)
-}
+            if (!coin.taken) {
+                canvas.drawBitmap(game!!.coinBitmap, coin.coinX!!.toFloat(),
+                        coin.coinY!!.toFloat(), paint)
+            }
         game?.doCollisionCheck()
         super.onDraw(canvas)
 
         //TODO loop through the list of enemy and draw them here
         for (enemy in game!!.enemy)
 
-            if (!enemy.alive){
+            if (!enemy.alive) {
                 canvas.drawBitmap(game!!.enemyBitmap, enemy.enemyx!!.toFloat(),
                         enemy.enemyy!!.toFloat(), paint)
             }
-        game?.doCollisionCheck()
+
+        game?.doCollisionCheck2()
         super.onDraw(canvas)
     }
 }
