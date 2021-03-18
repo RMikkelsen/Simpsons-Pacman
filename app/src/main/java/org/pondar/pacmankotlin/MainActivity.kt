@@ -16,12 +16,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     //used for pacman movements
     private var game: Game? = null
     private var myTimer: Timer = Timer()
-    var counter: Int = 0
+
 
     //constants for directions - define the rest yourself
     //for game timer (60 sec)
     private var Timer2: Timer = Timer()
-    var counter2: Int = 26
+
     //reference to the game class.
 
 
@@ -97,12 +97,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         //This method runs in the same thread as the UI.
         // so we can draw
         if (game?.running == true) {
-            counter++
+            game!!.counter++
             //update the counter - notice this is NOT seconds in this example
             //you need TWO counters - one for the timer count down that will
             // run every second and one for the pacman which need to run
             //faster than every second
-            textView.text = getString(R.string.timerValue, counter)
+            textView.text = getString(R.string.timerValue, game?.counter)
 
 
             if (game?.direction == 0) { // move right
@@ -132,11 +132,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         } else if (v.id == R.id.pause) {
             game?.running = false
         } else if (v.id == R.id.reset) {
-            counter = 0
-            counter2 = 26
+            game?.counter = 0
+        game?.counter2 = 26
             game?.newGame() //you should call the newGame method instead of this
             game?.running = false
-            textView.text = getString(R.string.timerValue, counter)
+            textView.text = getString(R.string.timerValue, game?.counter)
 
         }
     }
@@ -158,10 +158,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         } else if (id == R.id.action_newGame) {
             Toast.makeText(this, "New Game clicked", Toast.LENGTH_LONG).show()
             game?.running = false
-            counter = 0
-            counter2 = 26
+           game?.counter = 0
+            game?.counter2 = 26
             game?.newGame()
-            textView.text = getString(R.string.timerValue, counter)
+            textView.text = getString(R.string.timerValue, game?.counter)
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -172,17 +172,17 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         //This method runs in the same thread as the UI.
         // so we can draw
         if (game?.running == true) {
-            counter2--
+            game!!.counter2--
             //update the counter - notice this is NOT seconds in this example
             //you need TWO counters - one for the timer count down that will
             // run every second and one for the pacman which need to run
             //faster than every second
-            textView3.text = getString(R.string.timerValue2, counter2)
-            if (counter2 <= 0) {
-                Toast.makeText(this, "GAME OVER!!", Toast.LENGTH_SHORT).show()
+            textView3.text = getString(R.string.timerValue2, game?.counter2)
+            if (game!!.counter2 <= 0) {
+                Toast.makeText(this, "TIME'S UP! GAME OVER!", Toast.LENGTH_SHORT).show()
                 game?.running = false
                 game?.newGame()
-                counter2 = 26
+                //counter2 = 26
 
             }
         }

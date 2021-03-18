@@ -25,11 +25,10 @@ class Game(private var context: Context, view: TextView) {
     var pacy = 0
     var coinBitmap: Bitmap
     var enemyBitmap: Bitmap
-    var enemyx = 0
-    var enemyy = 0
     var running = false
     var direction = 0
-
+    var counter: Int = 0
+    var counter2: Int = 26
 
     //did we initialize the coins?
     var coinsInitialized = false
@@ -91,21 +90,25 @@ class Game(private var context: Context, view: TextView) {
 
     }
 
-
     fun newGame() {
         pacx = 100
         pacy = 400 //just some starting coordinates - you can change this.
         //reset the points
         coins.clear()
         coinsInitialized = false
-        enemy.clear()
+       enemy.clear()
         enemyInitialized = false
         points = 0
         pointsView.text = "${context.resources.getString(R.string.points)} $points"
+        counter = 0
+        counter2 = 26
+        running = false
         gameView?.invalidate() //redraw screen
-
     }
 
+fun stop(){
+    running = false
+}
     fun setSize(h: Int, w: Int) {
         this.h = h
         this.w = w
@@ -194,18 +197,18 @@ class Game(private var context: Context, view: TextView) {
         }
     }
 
-    //TODO check if the pacman touches an enemy
+    //check if the pacman touches an enemy
     fun doCollisionCheck2() {
         for (enemy in enemy) {
             if (pacx + pacBitmap.width >= enemy.enemyx && pacx <= enemy.enemyx + enemyBitmap.width && pacy + pacBitmap.height >= enemy.enemyy && pacy <= enemy.enemyy + enemyBitmap.height && !enemy.alive) {
-                Toast.makeText(this.context, "DOH!!", Toast.LENGTH_SHORT).show()
-                enemy.alive = false
-                //return newGame()
+                Toast.makeText(this.context, "DOH! GAME OVER!", Toast.LENGTH_SHORT).show()
+              enemy.alive = false
+            return stop()
             }
         }
     }
 
-    //TODO check if the pacman touches a gold coin
+    //check if the pacman touches a gold coin
     //and if yes, then update the neccesseary data
     //for the gold coins and the points
     //so you need to go through the arraylist of goldcoins and

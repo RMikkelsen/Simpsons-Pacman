@@ -20,11 +20,7 @@ class GameView : View {
         this.game = game
     }
 
-    //timer
-    fun reset() {
-        pacx = 50
-        invalidate()
-    }
+
 
     /* The next 3 constructors are needed for the Android view system,
 	when we have a custom view.
