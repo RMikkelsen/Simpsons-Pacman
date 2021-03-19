@@ -276,7 +276,7 @@ class Game(private var context: Context, view: TextView, view2: TextView, view3:
                 totalPointsView.text = "${"Total Points:"} $totalPoints"
             }
             if (points == coins.size && coin.taken) {
-                Toast.makeText(this.context, "YOU WON!!", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this.context, "YOU WON!!", Toast.LENGTH_SHORT).show()
                 level += 1
                 levelsView.text = "${context.resources.getString(R.string.levels)} ${level}+1"
                 return newLevel()
