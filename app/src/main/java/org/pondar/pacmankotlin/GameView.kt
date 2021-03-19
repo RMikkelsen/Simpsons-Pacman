@@ -13,8 +13,6 @@ class GameView : View {
     private var game: Game? = null
     private var h: Int = 0
     private var w: Int = 0 //used for storing our height and width of the view
-    var pacx: Int = 0
-    var pacy: Int = 0
 
     fun setGame(game: Game?) {
         this.game = game
@@ -59,7 +57,7 @@ class GameView : View {
                 game?.pacy!!.toFloat(), paint)
 
 
-        //TODO loop through the list of goldcoins and draw them here
+        //loop through the list of goldcoins and draw them here
         for (coin in game!!.coins)
 
             if (!coin.taken) {
@@ -69,7 +67,7 @@ class GameView : View {
         game?.doCollisionCheck()
         super.onDraw(canvas)
 
-        //TODO loop through the list of enemy and draw them here
+        //loop through the list of enemy and draw them here
         for (enemy in game!!.enemy)
 
             if (!enemy.alive) {
@@ -78,6 +76,7 @@ class GameView : View {
             }
 
         game?.doCollisionCheck2()
+     
         super.onDraw(canvas)
     }
 }

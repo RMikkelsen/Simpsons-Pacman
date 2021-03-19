@@ -1,6 +1,7 @@
 package org.pondar.pacmankotlin
 
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +12,7 @@ import android.view.View.OnClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+open class MainActivity : AppCompatActivity(), OnClickListener {
 
     //used for pacman movements
     private var game: Game? = null
@@ -24,10 +25,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     //reference to the game class.
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         //makes sure it always runs in portrait mode
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         }, 0, 1000) //0 indicates we start now, 1000 is for each second
 
-        game = Game(this, pointsView)
+        game = Game (this, pointsView, levelsView, totalPointsView)
         //intialize the game view class and game class
         game?.setGameView(gameView)
         gameView.setGame(game)
