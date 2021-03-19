@@ -18,15 +18,10 @@ class GameView : View {
         this.game = game
     }
 
-
-
-    /* The next 3 constructors are needed for the Android view system,
-	when we have a custom view.
-	 */
+    // The next 3 constructors are needed for the Android view system, when we have a custom view.
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
@@ -56,7 +51,6 @@ class GameView : View {
         canvas.drawBitmap(game!!.pacBitmap, game?.pacx!!.toFloat(),
                 game?.pacy!!.toFloat(), paint)
 
-
         //loop through the list of goldcoins and draw them here
         for (coin in game!!.coins)
 
@@ -76,7 +70,7 @@ class GameView : View {
             }
 
         game?.doCollisionCheck2()
-     
+
         super.onDraw(canvas)
     }
 }
